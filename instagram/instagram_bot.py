@@ -87,7 +87,7 @@ class InstagramAutomationGUI:
         pw_input = wait.until(EC.presence_of_element_located((By.NAME, "password")))
         id_input.send_keys(id_value)
         pw_input.send_keys(pw_value)
-        time.sleep(2)
+        driver.implicitly_wait(5)  
 
         login_btn = driver.find_element(By.CSS_SELECTOR, "._acan._acap._acas._aj1-._ap30")
         login_btn.send_keys(Keys.RETURN)
@@ -99,44 +99,43 @@ class InstagramAutomationGUI:
         search_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".x1lugfcp")))
         search_input.send_keys(tag_name)
 
-        time.sleep(2)
+        driver.implicitly_wait(5)  
         result = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".x9f619.x1n2onr6.x1ja2u2z.x78zum5.x2lah0s.x1qughib.x6s0dn4.xozqiw3.x1q0g3np")))
         target_tag = result[0]
         target_tag.click()
 
-        time.sleep(2)
+        driver.implicitly_wait(5)  
 
         pids = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "._aagw")))
-        time.sleep(2)
+        driver.implicitly_wait(5)  
 
         for pid in pids:
             try:
                 pid.click()
             except Exception as e:
                 print("피드 선택 중 오류가 발생했습니다:", e)
-            driver.implicitly_wait(5)
+            driver.implicitly_wait(5)  
 
+            follow_btn = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "div._ap3a._aaco._aacw._aad6._aade")))
             try:
-                follow_btn = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "._acan._acao._acas._aj1-._ap30")))
                 follow_btn.click()
             except Exception as e:
                 print("이미 팔로우가 되어 있습니다")
                 pass
 
-            time.sleep(2)
+            time.sleep(3)
             try:
-                like_btn = driver.find_element(By.CSS_SELECTOR, '._aamu._ae3_._ae47._ae48 [aria-label="좋아요"]')
+                like_btn = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'span._aamw svg[aria-label="좋아요"]')))
                 comment_path = wait.until(EC.element_to_be_clickable((By.XPATH, '//textarea[@aria-label="댓글 달기..."]')))
                 print("댓글 입력창: ", comment_path)
                 if like_btn:
                     like_btn.click()
-
                     time.sleep(2)
                     try:
                         comment_path.click()
                         comment_path = driver.find_element(By.XPATH, '//textarea[@aria-label="댓글 달기..."]')
                         comment_path.send_keys(comm)
-                        time.sleep(2)
+                        time.sleep(1)
                         comment_path.send_keys(Keys.ENTER)
                     except Exception as comm_error:
                         print("댓글 작성 중 에러 발생", comm_error)
@@ -145,12 +144,12 @@ class InstagramAutomationGUI:
                 print("좋아요 중 에러 발생(못 찾았거니 이미 되어 있습니다.)")
                 pass
 
-                time.sleep(2)
+                time.sleep(2)  
 
             try:
                 close_btn = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '[aria-label="닫기"]')))
                 close_btn.click()
-                time.sleep(2)
+                driver.implicitly_wait(5) 
             except Exception as e:
                 print("닫기 버튼을 클릭할 수 없습니다:", e)
             
