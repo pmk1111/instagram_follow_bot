@@ -14,5 +14,5 @@
    
 ## 또는
 1. 파일 다운로드
-2. vscode 터미널 > pyinstall --noconsole instagram_bot.py
+2. vscode 터미널 > pyinstaller --noconsole instagram_bot.py
 3. dist > instgram_bot > instagram_bot.exe 실행
