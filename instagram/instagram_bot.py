@@ -104,7 +104,7 @@ class InstagramAutomationGUI:
         target_tag = result[0]
         target_tag.click()
 
-        driver.implicitly_wait(5)  
+        driver.implicitly_wait(3)  
 
         pids = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "._aagw")))
         driver.implicitly_wait(5)  
@@ -114,10 +114,10 @@ class InstagramAutomationGUI:
                 pid.click()
             except Exception as e:
                 print("피드 선택 중 오류가 발생했습니다:", e)
-            driver.implicitly_wait(5)  
+            driver.implicitly_wait(3)  
 
-            follow_btn = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "div._ap3a._aaco._aacw._aad6._aade")))
             try:
+                follow_btn = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "div._ap3a._aaco._aacw._aad6._aade")))
                 follow_btn.click()
             except Exception as e:
                 print("이미 팔로우가 되어 있습니다")
