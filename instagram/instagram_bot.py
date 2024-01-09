@@ -98,8 +98,8 @@ class InstagramAutomationGUI:
 
         search_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".x1lugfcp")))
         search_input.send_keys(tag_name)
-
-        driver.implicitly_wait(5)  
+        time.sleep(2)
+         
         result = wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".x9f619.x1n2onr6.x1ja2u2z.x78zum5.x2lah0s.x1qughib.x6s0dn4.xozqiw3.x1q0g3np")))
         target_tag = result[0]
         target_tag.click()
